@@ -1,0 +1,47 @@
+.heading-in-individual-item{
+    font-weight: 600;
+    margin: 0 !important;
+    margin-top: 23% !important;
+}
+.individual-item-right-side-container h4{
+    color: #c4113f !important;
+    font-weight: 400;
+    font-size: 2.4rem;
+}
+.individual-item-right-side-container h5{
+    font-weight: 400;
+    font-size: 2.5rem !important;
+}
+.individual-item-right-side-container p {
+    font-size: 1.2rem;
+}
+.btn-cart{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-cart div{
+    font-size: 23px;
+}
+
+@media only screen and (max-width: 750px){
+    .individual-item-right-side-container h4{
+        font-size: 29px;
+    }
+    .descriptions{
+        padding: 5px;
+        text-align: center;
+    }
+    .heading-in-individual-item{
+        font-size: 1.7rem;
+    }
+    .btn-cart div{
+        font-size: 17px;
+    }
+    .individual-item-right-side-container h5{
+        font-weight: 400;
+        font-size: 1.8rem !important;
+    }
+    .individual-item-right-side-container p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,14 @@
+.cart-icon{
+    width: 29px;
+}
+.cart-icon-container{
+    position: relative;
+    cursor: pointer;
+}
+.cart-icon-container span{
+    color: black;
+    position: absolute;
+    bottom: 0;
+    left: 36%;
+    font-size: 13px;
+}

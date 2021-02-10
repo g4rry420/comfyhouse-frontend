@@ -1,0 +1,23 @@
+.mainSection-heading-container{
+    margin-top: 20%;
+}
+.heading-container{
+    position: relative;
+}
+.heading-container .div{
+    position: absolute;
+    background-color: #b9b6bc;
+    width: 2px;
+    right: -5px;
+    height: 148px;
+    top: -24px;
+}
+.heading-in-MainSection{
+    font-size: 30px;
+    font-weight: 600;
+}
+@media only screen and (max-width: 750px){
+    .mainSection-heading-container{
+        display: none;
+    }
+}

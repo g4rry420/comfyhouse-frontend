@@ -1,0 +1,11 @@
+.background-for-category{
+    background-color: #f4f4f5;
+}
+.category-img-container img{
+    width: 100%;
+}
+@media only screen and (max-width: 750px){
+    .category-img-container{
+        display: none;
+    }
+}

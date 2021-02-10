@@ -1,0 +1,24 @@
+.department-product{
+    cursor: pointer;
+}
+.department-product:focus{
+    box-shadow: 0 0 0 1px var(--primaryColor);
+    border-radius: 10px;
+}
+.img-container:hover{
+    background-color: rgba(34,25,36,.06);
+    transform: translateY(-8px);
+    transition: var(--mainTransition);
+}
+.img-container:hover + .department-product-h3 {
+    color: var(--primaryColor);
+    text-decoration: underline;
+}
+.link, .link:hover{
+    color: var(--mainBlack);
+    text-decoration: none;
+}
+.department-product-h3:hover{
+    color: var(--primaryColor);
+    text-decoration: underline;
+}

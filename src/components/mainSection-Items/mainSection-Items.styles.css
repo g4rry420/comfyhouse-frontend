@@ -1,0 +1,16 @@
+.mainSection-items-container{
+    height: 134px;
+}
+.mainSection-items-container:hover{
+    background-color: rgba(34,25,36,.06);
+}
+.mainSection-items-container a{
+    color: #221924;
+}
+.mainSection-items-heading p {
+    font-weight: 600;
+    margin: 0;
+}
+.mainSections-Image-container {
+    height: 110px;
+}

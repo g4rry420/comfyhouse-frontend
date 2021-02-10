@@ -1,0 +1,41 @@
+.form-container{
+    width: 50%;
+    margin: 10% auto;
+}
+.login-button{
+    font-weight: 600;
+}
+.heading-in-login-form{
+    font-size: 23px;
+    font-weight: 600;
+}
+.heading-container-in-login .container{
+    padding: 0 !important;
+}
+.heading-container-in-login .text-center{
+    text-align: left !important;
+}
+.heading-container-in-login .text-center .my-5 {
+    margin: 0 !important;
+}
+.heading-container-in-login p {
+    font-weight: lighter;
+}
+.google-login{
+    display: inline-block;
+}
+.google-login .custom-button {
+    background-color: #4285F4;
+    border: 1px solid #4285F4;
+}
+.google-login .custom-button:hover{
+    background-color: transparent;
+    color: #4285F4;
+}
+
+@media only screen and (max-width: 750px) {
+    .signup-container-in-mainPage{
+        margin: 0 !important;
+        margin-top: 20% !important;
+    }
+}

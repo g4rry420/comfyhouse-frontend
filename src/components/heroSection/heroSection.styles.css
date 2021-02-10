@@ -1,0 +1,45 @@
+.hero-section {
+  min-height: calc(100vh - 60px);
+  background: url("../../assets/hero-bcg.jpeg");
+  background-repeat: no-repeat;
+  background-position: center cover;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.background {
+    background:rgba(255,255,255, 0.8);
+}
+.btn-shop{
+    padding: 12px 18px;
+    background-color: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
+    transition: var(--mainTransition);
+}
+.btn:focus {
+    box-shadow: none !important;
+}
+.btn-shop a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+.btn-shop:hover , .btn-shop:hover > a{
+    background-color: transparent;
+    color: var(--primaryColor) !important;
+    transition: var(--mainTransition);
+}
+.h1{
+    font-weight: 600 !important;
+    color: black;
+}
+
+@media only screen and (max-width: 750px) {
+    .display-3{
+        font-size: 2.7rem;
+    }
+    .h1{
+        margin-left: -34px;
+    }
+}
