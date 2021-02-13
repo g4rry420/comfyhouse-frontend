@@ -1,16 +1,22 @@
-.mainSection-items-container{
+/* .mainSection-items-container{
     height: 134px;
-}
-.mainSection-items-container:hover{
-    background-color: rgba(34,25,36,.06);
+} */
+.mainSection-items-container:hover > .mainSection-items-heading p{
+    color: var(--primaryColor);
 }
 .mainSection-items-container a{
     color: #221924;
+    text-decoration: none;
 }
 .mainSection-items-heading p {
     font-weight: 600;
     margin: 0;
 }
+
 .mainSections-Image-container {
     height: 110px;
+}
+.mainSection-items-container:hover, .mainSection-items-container a:hover{
+    background-color: rgba(34,25,36,.06);
+    color: var(--primaryColor);
 }

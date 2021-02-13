@@ -10,14 +10,13 @@ import { ShopProductsContext } from "../../context/shopProducts/shopProductsCont
 export default function Homepage() {
     const { loading } = useContext(ShopProductsContext);
     const DirectorySpinner = WithSpinner(Directory);
-    
     return (
         <div>
             <HeroSection/>
             <div id="shopNow">
                 <Heading title="Shop By Department" display="display-3" h1="homepage-h1" />
             </div>
-            <DirectorySpinner isLoading={loading} />
+            <Directory />
         </div>
     )
 }

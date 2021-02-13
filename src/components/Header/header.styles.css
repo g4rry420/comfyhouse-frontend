@@ -4,6 +4,7 @@
 .links a {
     color: black;
     font-weight: 600;
+    text-decoration: none;
 }
 .links a:hover {
     color: var(--primaryColor);
@@ -148,7 +149,6 @@
 }
 .sign-out:hover{
     color: var(--primaryColor);
-    text-decoration: underline;
 }
 
 @media only screen and (max-width: 750px) {

@@ -19,17 +19,17 @@ export const addItemToCart = (dispatchCart, product) => {
     })
 }
 
-export const removeItem = (dispatchCart, id) => {
+export const removeItem = (dispatchCart, _id) => {
     dispatchCart({
         type: "REMOVE_ITEM",
-        id
+        _id
     })
 }
 
-export const qtyIncrease = (dispatchCart, id) => {
+export const qtyIncrease = (dispatchCart, _id) => {
     dispatchCart({
         type: "QTY_INCREASE",
-        id
+        _id
     })
 }
 

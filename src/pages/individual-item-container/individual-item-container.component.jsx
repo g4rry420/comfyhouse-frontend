@@ -1,31 +1,46 @@
-import React, { lazy, Suspense, useContext } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Route } from "react-router-dom"
 
 import Spinner from "../../components/spinner/spinner.component"
-import { ShopProductsContext } from '../../context/shopProducts/shopProductsContext';
+import API from "../../API"
+import ProductDetails from '../../components/product-details/product-details.component';
 
 const IndividualItem = lazy(() => import("../../components/individual-item/individual-item.component"));
 
 export default function IndividualItemContainer({ match}) {
-    const {products, objectsToArray} = useContext(ShopProductsContext)
-    let data;
-    let mainData;
-    if(products.shopProducts){
-        data = objectsToArray(objectsToArray(objectsToArray(products.shopProducts).find(product =>  product.routeName === match.params.particularDepartment).items)
-                    .map(element => element.items).find(item => objectsToArray(item).find(element => element.routeName === match.params.itemPreview)))
-                    .filter(element => element.routeName === match.params.itemPreview)
-        
-        mainData = objectsToArray(data[0].items).filter(item => item.id.toString() === match.params.id)       
-    }
+    const [productDetails, setProductDetails] = useState(null);
+
+    useEffect(() => {
+        if(!!!match.params._id) return;
+
+        const { _id } = match.params;
+        fetch(`${API}/productdetails`,{
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({_id})
+        })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    setProductDetails(data.productDetails)
+                }else{
+                    console.log(data)
+                }
+            })
+            .catch(err => console.log(err))
+    },[])
+
 
     return (
         <div>
         <Suspense fallback={<Spinner/>}>
-            {
-                products.shopProducts ? <Route path={match.path} render={() => <IndividualItem state={mainData[0]} />} />
-                    : <Spinner/>
-            }
-            
+        {
+            productDetails ? <Route path={match.path} render={() => <IndividualItem state={productDetails[0]} />} />
+                : <Spinner/>
+        }   
         </Suspense>
         </div>
     )

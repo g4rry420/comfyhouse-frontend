@@ -1,43 +1,68 @@
-import React,{ useContext } from 'react'
+import React,{ Fragment, useRef } from 'react'
+import Swiper from 'react-id-swiper';
+import 'swiper/css/swiper.min.css';
 
 import "./category-mainSection.styles.css"
 import MainSectionSideHeading from '../mainSection-side-Heading/mainSection-side-Heading.component'
 import MainSectionItems from '../mainSection-Items/mainSection-Items.component'
-import { ShopProductsContext } from "../../context/shopProducts/shopProductsContext"
+// import ArrowImageRight from '../arrow-image-right/arrow-image-right.component';
+// import ArrowImageLeft from '../arrow-image-left/arrow-image-left.component';
 
 function CategoryMainSection({ state }) {
-    const { objectsToArray,sortFunction } = useContext(ShopProductsContext)
+    const swiperRef = useRef();
+    swiperRef.current = new Array(state.length)
+    const params = {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        direction: "horizontal",
+        // navigation: {
+        //     nextEl: '.swiper-button-next',
+        //     prevEl: '.swiper-button-prev'
+        // }
+    }
+    // const goNext = (id) => {
+    //     const currentSwiper = swiperRef.current.filter(item => {
+    //         console.log(item)
+    //         return item.parentNode.id === id
+    //     })
+    //     if(currentSwiper.length){
+    //         currentSwiper[0].swiper.slideNext()
+    //     }
+    // };
+    // const goPrev = (id) => {
+    //     const currentSwiper = swiperRef.current.filter(item => item.parentNode.id === id)
+    //     console.log(currentSwiper)
+    //     if(currentSwiper.length){
+    //         currentSwiper[0].swiper.slidePrev();
+    //     }
+    // };
+
     return (
         <div>
             <div className="margin-in-mainSection my-5">
                 <div className="row">
-                    <div className="col-md-2">
-                        <div className="row">
-                        {
-                            state.items !== undefined ?
-                                objectsToArray(state.items).sort(sortFunction()).map((item) => {
-                                    return(
-                                        <MainSectionSideHeading key={item.id} item={item} /> 
-                                    )
-                                }) : 
-                                    null
-                        }
-
-                        </div>  
-                    </div>
-                    <div className="col-md-10">
-                        <div className="row">
-                        {
-                            state.items !== undefined ?
-                                objectsToArray(state.items).sort(sortFunction()).map(item => {
-                                return objectsToArray(item.items).sort(sortFunction()).filter((item, idx) => idx < 6 ).map(ite => (
-                                    
-                                    <MainSectionItems key={ite.id} item={ite} />
-                                ))}) :
-                                null
-                        } 
-                        </div>
-                    </div>
+                {
+                    state.length ? (
+                        state.map((item, idx) => (
+                            <Fragment key={item._id}>
+                                <MainSectionSideHeading item={item} />
+                                <div className="col-md-10 mb-5" id={item._id}>
+                                <Swiper ref={el => swiperRef.current[idx] = el} {...params}    >
+                                {
+                                    item.items.map(department => (
+                                        <div key={department._id}>
+                                            <MainSectionItems item={department} />
+                                        </div>
+                                    ))
+                                }
+                                </Swiper>
+                                {/*<ArrowImageLeft arrowImageLeft={() => goPrev(item._id)} />
+                            <ArrowImageRight arrowImageRight={() => goNext(item._id)} />*/}
+                                </div>
+                            </Fragment>
+                        ))
+                    ) : null
+                }
                 </div>
             </div>
         </div>

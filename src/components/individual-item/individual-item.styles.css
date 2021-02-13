@@ -1,3 +1,7 @@
+.swiper-button-next, .swiper-button-prev{
+    color: var(--primaryColor);
+}
+
 .individual-item-big-img-container{
     width: 100%;
     position: relative;
@@ -15,13 +19,33 @@
     font-size: 1.2rem;
 }
 .small-image-container{
-    margin: 0 75px;
+    margin: 0;
+    width: auto;
 }
 .small-image-container img{
     cursor: pointer;
     border-radius: 10px;
+    width: 50%;
+
 }
 
+.individual-item-left-container .slick-next::before, .slick-prev::before{
+    color: var(--primaryColor);
+}
+.individual-item-left-container .small-img-main-container .slick-slide .small-image-container img{
+    opacity: 0.6;
+}
+
+.individual-item-left-container .small-img-main-container .slick-current .small-image-container img {
+    /* transform: scale(1.2);
+    padding: 1px 11px;
+    border-left: 8px solid var(--primaryColor);
+    border-top: 7px solid var(--primaryColor);
+    border-bottom: 2px solid var(--primaryColor);
+    border-right: 1px solid var(--primaryColor);
+    transition: var(--mainTransition); */
+    opacity: 1;
+}
 @media only screen and (max-width: 700px){
     .list-of-product-details-ul li{
         font-size: 1rem;

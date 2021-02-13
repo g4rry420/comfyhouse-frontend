@@ -33,8 +33,8 @@ function CheckoutPage({ location }) {
                 </div>
             </div>
             {
-                cart.map( ({id, ...otherProps} ) => (
-                    <CheckoutItem key={id} {...otherProps} id={id} />
+                cart.map( ({_id, ...otherProps} ) => (
+                    <CheckoutItem key={_id} {...otherProps} _id={_id} />
                 ))
             }
 

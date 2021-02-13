@@ -4,10 +4,10 @@ import { Link, withRouter } from "react-router-dom"
 import "./mainSection-Items.styles.css"
 
 function MainSectionItems({ item, match,location }) {
-    const { imageUrl, title, routeName } = item;
+    const { imageUrl, title, routeName, _id } = item;
     return (
-        <div className="col-md-2 my-5 py-4 mainSection-items-container">
-            <Link to={{ pathname:match.url + "/" + routeName, state:{previousPath: location.pathname}}} >
+        <div className="my-4 py-4 mainSection-items-container">
+            <Link to={{ pathname: `${match.url}/${routeName}/${_id}`, state:{previousPath: location.pathname}}} >
                 <div className="mainSections-items text-center">
                     <div className=" text-center mainSections-Image-container">
                         <img src={imageUrl} alt=""  />

@@ -12,7 +12,7 @@ function ItemsPreviewContainer({ match }) {
         <div>
         <Suspense fallback={<Spinner/>}>
             <Route exact path={`${match.path}`} component={ItemPreviewSubContainer} />
-            <Route path={`${match.path}/:id`} component={IndividualItemContainer} /> 
+            <Route path={`${match.path}/:_id`} component={IndividualItemContainer} /> 
         </Suspense>
         </div>
     )

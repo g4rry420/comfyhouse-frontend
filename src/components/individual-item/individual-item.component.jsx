@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { v4 as uuidv4 } from "uuid"
-import { motion, AnimatePresence } from "framer-motion"
+import React,{ useEffect, useRef, useState } from 'react'
+// import Swiper from 'react-id-swiper';
+// import { Controller } from 'swiper/js/swiper.esm';
+// import 'swiper/css/swiper.min.css';
+import Slider from "react-slick";
 
 import "./individual-item.styles.css"
 import IndividualItemRightSide from '../individual-item-right-side/individual-item-right-side.component';
@@ -8,113 +10,68 @@ import ProductDetails from '../product-details/product-details.component';
 import ArrowImageRight from '../arrow-image-right/arrow-image-right.component';
 import ArrowImageLeft from '../arrow-image-left/arrow-image-left.component';
 
-let countForArrow = 0;
-
-const imageVariant = {
-    exit:{ x: "-100vw", opacity: 0},
-    secondExit:{ x: "10vw", opacity: 0}
-}
 
 export default function IndividualItem({ state }) {
-    
-    const [largeImage, setLargeImage] = useState([{
-        id: state.item[0].id,
-        largeImage: state.item[0].largeImage1
-    }])
-    const [imageAnime, setImageAnime] = useState(true);
-
-    const [smallImage] = useState(state.item[0].smallImage);
-
-    const smallImageRef = useRef();
-    const largeImageRef = useRef();
-    smallImageRef.current = new Array(smallImage.length)
-    largeImageRef.current = new Array(largeImage.length)
-
+    const [nav1, setNav1] = useState(null)
+    const [nav2, setNav2] = useState(null)
+    let slider1 = []
+    let slider2 = []
+  
     useEffect(() => {
-        smallImageRef.current.filter(img => {
-                   img.style.transform = "";
-            return img.style.border = "";
-        })
+        setNav1(slider1)
+        setNav2(slider2)
+    }, [slider1, slider2])
+  
+    const settingsForSlider1 = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipeToSlide: true,
+        // nextArrow: <ArrowImageRight/>,
+        // prevArrow: <ArrowImageLeft/>
+    };
 
-        let checkImage = smallImageRef.current.filter(img => img.id === largeImageRef.current[0].id);
-        checkImage[0].style.border = "2px solid #f09d51";
-        checkImage[0].style.transform = "scale(1.2)";
-
-        countForArrow = parseInt(largeImage[0].id.toString().charAt(largeImage[0].id.toString().length - 1)) - 1;
-        
-    }, [largeImage])
-
-    const getLargeImage = (image) => {
-        let mainLargeImg = state.item[0].largeImage.find(img => img.id === image.id);
-        if(!largeImage.map(largeImg => largeImg.id).includes(image.id) && mainLargeImg !== undefined) {
-            setLargeImage([{
-                id: mainLargeImg.id,
-                largeImage: mainLargeImg.largeImage
-            }])
-        }
+    const settingsForSlider2 = {
+        dots: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        swipeToSlide: true,
+        focusOnSelect: true
     }
-
-    const arrowImageLeft = () => {
-        
-        if(countForArrow > 0){
-            let mainImage = state.item[0].largeImage[countForArrow-=1]
-
-            if(mainImage !== undefined){
-                setImageAnime(false);
-                setLargeImage([{
-                    id: mainImage.id,
-                    largeImage: mainImage.largeImage
-                }])
-            }  
-        }else{
-            console.log("arrowImageLeft else is running")
-        }
-    }
-
-    const arrowImageRight = () => {
-        
-        if(countForArrow < state.item[0].largeImage.length - 1){
-            let mainImage = state.item[0].largeImage[countForArrow+=1]
-
-            if(mainImage !== undefined){
-                setImageAnime(true);
-                setLargeImage([{
-                    id: mainImage.id,
-                    largeImage: mainImage.largeImage
-                }])
-            }
-        }else{
-            console.log("arrowImageRight else is running")
-        }
-
-    } 
 
     return ( 
         <div className="containe-fluid">
             <div className="row">
                 <div className="col-md-7">
                     <div className="individual-item-left-container">
-                        <div className="individual-item-big-img-container text-center">
-                            
-                            <ArrowImageLeft arrowImageLeft={arrowImageLeft} />
-                            <AnimatePresence >
-                                { largeImage.map((img, i) => (
-                                            <motion.img
-                                                layout="position"
-                                                variants={imageVariant}
-                                                animate={{ x: 0,  opacity: 1}}
-                                                exit={imageAnime ? "exit" : "secondExit"}
-                                                transition={{ duration: 0.5 }}
-                                            ref={el => largeImageRef.current[i] = el} key={img.id} id={img.id} src={img.largeImage} alt="large product"/>
-                                        ))}
-                            </AnimatePresence>
-                            <ArrowImageRight arrowImageRight={arrowImageRight} />
-                            
-                        </div>
-                        <div className="small-image-container">
-                            {smallImage.map((img, i) => (
-                               <img ref={el => smallImageRef.current[i] = el} onClick={() => getLargeImage(img)} key={img.id} id={img.id} className="mx-3" src={img.smallImage} alt="small product"/>
-                            ))}
+                        <Slider {...settingsForSlider1}
+                            asNavFor={nav2}
+                            ref={slider => slider1 = slider}
+                        >
+                        {
+                            state.largeImage.map(img => (
+                                <div className="individual-item-big-img-container text-center" key={img._id}>
+                                    <img src={img.largeImage} alt={`Large product ${img._id}`} />
+                                </div>
+                            ))
+                        }
+                        </Slider>
+                        <div className="small-img-main-container">
+                        <Slider {...settingsForSlider2}
+                            asNavFor={nav1}
+                            ref={slider => slider2 = slider}
+                        >
+                        {
+                            state.smallImage.map((img) => (
+                                <div className="small-image-container" key={img._id}>
+                                    <img src={img.smallImage} alt={`Small product ${img._id}`}/>
+                                </div>
+                            ))
+                        }
+                        </Slider>
                         </div>
                     </div>
                 </div>
@@ -122,8 +79,8 @@ export default function IndividualItem({ state }) {
                         <IndividualItemRightSide state={state} />
 
                         <ul className="list-of-product-details-ul">
-                            {state.item[0].productDetails.map(proDetails => (
-                                <ProductDetails key={uuidv4()} proDetails={proDetails} />
+                            {state.productDetails.map((proDetails, idx) => (
+                                <ProductDetails key={idx} proDetails={proDetails} />
                             ))}
                         </ul>
                 </div>
@@ -131,3 +88,59 @@ export default function IndividualItem({ state }) {
         </div>
     )
 }
+
+// const gallerySwiperRef = useRef(null);
+// const thumbnailSwiperRef = useRef(null);
+
+// const gallerySwiperParams = {
+//     modules: [Controller],
+//     slidesPerView: 1,
+//     spaceBetween: 10,
+//     loop: true,
+//     direction: "horizontal",
+//     navigation: {
+//       nextEl: '.swiper-button-next',
+//       prevEl: '.swiper-button-prev',
+//     }
+// };
+
+// const thumbnailSwiperParams = {
+//     modules: [Controller],
+//     spaceBetween: 10,
+//     centeredSlides: true,
+//     slidesPerView: 'auto',
+//     touchRatio: 0.2,
+//     slideToClickedSlide: true
+// };
+
+// useEffect(() => {
+//     const gallerySwiper = gallerySwiperRef.current.swiper;
+//     const thumbnailSwiper = thumbnailSwiperRef.current.swiper;
+//     if (gallerySwiper.controller && thumbnailSwiper.controller) {
+//       gallerySwiper.controller.control = thumbnailSwiper;
+//       thumbnailSwiper.controller.control = gallerySwiper;
+//     }
+// },[gallerySwiperRef, thumbnailSwiperRef]);
+
+
+
+
+
+// <Swiper {...gallerySwiperParams} ref={gallerySwiperRef}>
+// {
+//     state.largeImage.map(img => (
+//         <div className="individual-item-big-img-container text-center" key={img._id}>
+//             <img src={img.largeImage} alt={`Large product ${img._id}`} />
+//         </div>
+//     ))
+// }
+// </Swiper>
+// <Swiper {...thumbnailSwiperParams} ref={thumbnailSwiperRef}>
+// {
+//     state.smallImage.map((img, idx) => (
+//         <div className="small-image-container" key={img._id}>
+//             <img src={img.smallImage} alt={`Small product ${img._id}`}/>
+//         </div>
+//     ))
+// }
+// </Swiper>

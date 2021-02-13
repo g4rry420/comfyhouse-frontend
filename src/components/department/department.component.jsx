@@ -1,19 +1,30 @@
-import React, {useContext } from 'react'
+import React,{ useEffect, useState } from 'react'
 
-import { ShopProductsContext } from "../../context/shopProducts/shopProductsContext"
 import "./department.styles.css"
 import DepartmentItem from '../department-item/department-item.component';
- 
+import API from "../../API" 
+
 function Department() {
-    const { products, objectsToArray } = useContext(ShopProductsContext);
+    const [departments, setDepartments] = useState(null)
+    useEffect(() => {
+        fetch(`${API}/departments`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    setDepartments(data.department)
+                }else{
+                    console.log(data)
+                }
+            })
+            .catch(err => console.log(err))
+    }, [])
     return (
         <div className="row">
-        {objectsToArray(products.shopProducts).map( ({ id, ...otherProps  }) => {
-                return (
-                    <DepartmentItem key={id} {...otherProps} />
-                )
-            })
-        }  
+        {
+            departments && departments.map(department => (
+                <DepartmentItem key={department._id} {...department} />
+            ))
+        }
         </div>
     )
 }

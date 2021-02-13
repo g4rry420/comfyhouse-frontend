@@ -6,7 +6,7 @@ import { removeItem, qtyDecrease, qtyIncrease }  from "../../context/reducers/ca
 
 export default function CheckoutItem(props) {
     const { dispatchCart } = useContext(ShopProductsContext);
-    const { id, title, qty, img, price } = props;
+    const { _id, title, qty, img, price } = props;
     return (
         <div className="checkout-item" >
             <div className="checkout-item-img-container">
@@ -14,7 +14,7 @@ export default function CheckoutItem(props) {
             </div>
             <span className="checkout-item-title"> {title} </span>
             <div className="checkout-item-quantity">
-                <svg onClick={() => qtyIncrease(dispatchCart, id)} className="bi bi-chevron-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg onClick={() => qtyIncrease(dispatchCart, _id)} className="bi bi-chevron-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                 </svg>
                 <span> {qty} </span>
@@ -23,7 +23,7 @@ export default function CheckoutItem(props) {
                 </svg>
             </div>
             <span className="checkout-item-price"> ${price} </span>
-            <div onClick={() => removeItem(dispatchCart, id)} className="remove-button"> &#10005; </div>  
+            <div onClick={() => removeItem(dispatchCart, _id)} className="remove-button"> &#10005; </div>  
         </div>
     )
 }

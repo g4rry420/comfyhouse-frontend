@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react'
-import { Route } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 
 import './sub-department.styles.css'
 import ScrollToTop from "../../components/scrollToTop/scrollToTop"
@@ -13,8 +13,10 @@ function SubDepartment({ match }) {
         <div>
             <ScrollToTop/>
             <Suspense fallback={<Spinner/>}>
-                <Route exact path={match.path} component={CategoryContainer} />
-                <Route path={`${match.path}/:itemPreview`} component={ItemsPreviewContainer} />
+                <Switch>
+                    <Route exact path={match.path} component={CategoryContainer} />
+                    <Route path={`${match.path}/:itemPreview/:subDepartmentItemId`} component={ItemsPreviewContainer} />
+                </Switch>
             </Suspense>
         </div>
     )

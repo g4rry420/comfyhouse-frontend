@@ -1,31 +1,29 @@
-import React, { useContext } from 'react'
+import React,{ useEffect } from 'react'
 import { withRouter } from "react-router-dom"
 
 import "./category-header.styles.css"
 import CategoryLinks from '../category-links/category-links.component'
-import { ShopProductsContext } from "../../context/shopProducts/shopProductsContext"
+import Spinner from '../spinner/spinner.component';
 
 function CategoryHeader({ state }) {
-    const { objectsToArray, sortFunction } = useContext(ShopProductsContext);
+    if((state[0] === undefined) && (!!!state.length)) return <Spinner/>
     return (
         <div className="container-fluid background-for-category py-4">
             <div className="container">
                 <div className="row">
                     <div className="col-md-10">
-                    <h2 className="display-5 font-weight-bold">{state !== undefined ?  state.title : null}</h2>
+                    <h2 className="display-5 font-weight-bold">{state[0].department.title}</h2>
                         <div className="row">
                             {
-                                state.items !== undefined ?
-                                objectsToArray(state.items).sort(sortFunction()).map(item => (
-                                        <CategoryLinks key={item.id} item={item} /> 
-                                    )) :
-                                    null
+                                state.map(item => (
+                                        <CategoryLinks key={item._id} item={item} /> 
+                                    ))
                             }
                         </div>
                     </div>
                     <div className="col-md-2">
                         <div className="category-img-container">
-                            <img src={state !== undefined ?  state.mainImage : null} alt="product" />
+                            <img src={state[0].mainImage} />
                         </div>
                     </div>
                 </div>

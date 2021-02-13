@@ -4,11 +4,11 @@ import "./signup.styles.css"
 import CustomButton from "../custom-button/custom-button.component"
 import FormInput from "../form-input/form-input.component"
 import Heading from "../Heading/heading.component"
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils"
+import API from "../../API"
 
 export default function SignUp() {
     const [signupForm, setSignUpForm] = useState({
-        displayName: "",
+        fullName: "",
         email: "",
         password: "",
         confirmPassword: ""
@@ -17,18 +17,32 @@ export default function SignUp() {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const { displayName, email, password,confirmPassword } = signupForm;
+        const { fullName, email, password,confirmPassword } = signupForm;
 
         if(password !== confirmPassword){
             alert("Passwords don't match");
             return;
         }
 
+        const dataToSend = { fullName, email, password }
+
         try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, {displayName});
+            // const { user } = await auth.createUserWithEmailAndPassword(email, password);
+            // await createUserProfileDocument(user, {displayName});
+            fetch(`${API}/signup`,{
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dataToSend)
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+
             setSignUpForm({
-                displayName: "",
+                fullName: "",
                 email: "",
                 password: "",
                 confirmPassword: ""
@@ -44,7 +58,7 @@ export default function SignUp() {
         setSignUpForm({ ...signupForm, [name]: value})
     } 
 
-    const { displayName, email, password,confirmPassword } = signupForm;
+    const { fullName, email, password,confirmPassword } = signupForm;
     return (
         <div>
             <div className="heading-container-in-login">
@@ -52,7 +66,7 @@ export default function SignUp() {
                 <p className='my-3'>Sign Up with your email and password</p>
             </div>
             <form className="mt-5" onSubmit={handleSubmit}>
-                <FormInput name="displayName" type="text" handleChange={handleChange} value={displayName} placeholder="Full Name" />
+                <FormInput name="fullName" type="text" handleChange={handleChange} value={fullName} placeholder="Full Name" />
                 <FormInput name="email" type="email" handleChange={handleChange} value={email} placeholder="Email" />
                 <FormInput name="password" type="password" handleChange={handleChange} value={password} placeholder="Password" />
                 <FormInput name="confirmPassword" type="password" handleChange={handleChange} value={confirmPassword} placeholder="Confirm Password" />

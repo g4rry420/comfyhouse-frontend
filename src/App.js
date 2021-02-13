@@ -11,18 +11,17 @@ const CheckoutPage = lazy(() => import("./pages/checkout/checkout.component"));
 const LoginAndSignupPage = lazy(() => import("./pages/login-and-signup/login-and-signup.component"));
 
 function App() {
-
   return (
     <div className="App mb-5">
       <Header/>
-      
+
       <ErrorBoundary>
         <Suspense fallback={<Spinner/>}>
           <Switch>
             <Route exact path="/"  component={Homepage} />
             <Route exact path="/loginorsignup" component={LoginAndSignupPage } />
             <Route exact path="/checkout" component={CheckoutPage} />
-            <Route path={`/:particularDepartment`} component={SubDepartment} />
+            <Route path={`/:particularDepartment/:departmentId`} component={SubDepartment} />
           </Switch>
         </Suspense>
       </ErrorBoundary>

@@ -2,14 +2,14 @@ import React,{ useState, useContext } from 'react'
 import { Redirect } from "react-router-dom"
 
 import "./login.styles.css"
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils"
 import CustomButton from "../custom-button/custom-button.component"
 import FormInput from "../form-input/form-input.component"
 import Heading from "../Heading/heading.component"
 import { ShopProductsContext } from "../../context/shopProducts/shopProductsContext"
+import API from "../../API"
 
 export default function LogIn({ state }) {
-    const { currentUser } = useContext(ShopProductsContext);
+    const { currentUser, setCurrentUser, autheticate } = useContext(ShopProductsContext);
 
     const [login, setLogin] = useState({
         email: "",
@@ -19,9 +19,25 @@ export default function LogIn({ state }) {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const { email, password } = login;
         try {
-            await auth.signInWithEmailAndPassword(email, password);
+            fetch(`${API}/signin`,{
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(login)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success){
+                        autheticate(data, () => setCurrentUser(data))
+                    }else{
+                        console.log(data)
+                    }
+                })
+                .catch(err => console.log(err))
+
         } catch (error) {
             console.log(error)
         }
@@ -29,10 +45,13 @@ export default function LogIn({ state }) {
         setLogin({ email: "", password: "" });
     }
 
+
+
     const handleChange = event => {
         const { value, name } = event.target;
         setLogin({...login, [name]: value});
     }
+
 
     const { email, password } = login;
 
@@ -47,8 +66,6 @@ export default function LogIn({ state }) {
         }
     }
 
-
-
     return (
         <div>
             <div className="heading-container-in-login">
@@ -59,7 +76,7 @@ export default function LogIn({ state }) {
                 <FormInput name="email" handleChange={handleChange} value={email} type="email" placeholder="Email" />
                 <FormInput name="password" handleChange={handleChange} value={password} type="password" placeholder="Password" />
                 <div className="text-center d-md-flex justify-content-around both-buttons-container">
-                    <div onClick={signInWithGoogle} className="google-login">
+                    <div className="google-login">
                         <CustomButton  type="button" title="Sign In With Google" button="login-button" />
                     </div>
                     <CustomButton title="Login" button="login-button" />

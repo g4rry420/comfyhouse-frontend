@@ -12,7 +12,6 @@
 }
 .img-container:hover + .department-product-h3 {
     color: var(--primaryColor);
-    text-decoration: underline;
 }
 .link, .link:hover{
     color: var(--mainBlack);
@@ -20,5 +19,4 @@
 }
 .department-product-h3:hover{
     color: var(--primaryColor);
-    text-decoration: underline;
 }

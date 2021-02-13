@@ -13,8 +13,8 @@ function CartDropdown({ history }) {
             <div className='cart-items'>
             {
                 cart.length ? 
-                    cart.map(({ id, ...otherProps }) => (
-                        <CartItem key={id} {...otherProps} />
+                    cart.map(({ _id, ...otherProps }) => (
+                        <CartItem key={_id} {...otherProps} />
                     ))
                     : <span className="empty-message">Your Cart is empty!</span>
             }
