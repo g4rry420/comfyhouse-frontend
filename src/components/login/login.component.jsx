@@ -1,5 +1,6 @@
 import React,{ useState, useContext } from 'react'
 import { Redirect } from "react-router-dom"
+import GoogleLogin from 'react-google-login';
 
 import "./login.styles.css"
 import CustomButton from "../custom-button/custom-button.component"
@@ -52,6 +53,29 @@ export default function LogIn({ state }) {
         setLogin({...login, [name]: value});
     }
 
+    const handleLogin = (googleData) => {
+        fetch(`${API}/v1/auth/google`, {
+            method: "POST",
+            body: JSON.stringify({
+            token: googleData.tokenId
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    autheticate(data, () => setCurrentUser(data))
+                }else{
+                    console.log(data)
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    console.log(currentUser)
 
     const { email, password } = login;
 
@@ -65,7 +89,6 @@ export default function LogIn({ state }) {
             if(currentUser) return <Redirect to="/" />
         }
     }
-
     return (
         <div>
             <div className="heading-container-in-login">
@@ -77,7 +100,17 @@ export default function LogIn({ state }) {
                 <FormInput name="password" handleChange={handleChange} value={password} type="password" placeholder="Password" />
                 <div className="text-center d-md-flex justify-content-around both-buttons-container">
                     <div className="google-login">
-                        <CustomButton  type="button" title="Sign In With Google" button="login-button" />
+                       {/* <CustomButton  type="button" title="Sign In With Google" button="login-button" />*/}
+                        <GoogleLogin 
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            render={renderProps => (
+                                <CustomButton onClick={renderProps.onClick} disabled={renderProps.disabled}  type="button" title="Sign In With Google" button="login-button" />
+                            )}
+                            buttonText="Sign In With Google"
+                            onSuccess={handleLogin}
+                            onFailure={handleLogin}
+                            cookiePolicy={'single_host_origin'}
+                        />
                     </div>
                     <CustomButton title="Login" button="login-button" />
                 </div>
