@@ -1,4 +1,5 @@
 import React, { useContext, Fragment } from 'react'
+import { useHistory } from "react-router-dom"
 
 import "./individual-item-right-side.styles.css"
 import Heading from "../Heading/heading.component"
@@ -7,23 +8,33 @@ import { ShopProductsContext } from "../../context/shopProducts/shopProductsCont
 import { addItemToCart } from "../../context/reducers/cart-reducer/cart-actions"
 
 export default function IndividualItemRightSide({ state }) {
-    const { cart, dispatchCart } = useContext(ShopProductsContext)
+    const { cart, dispatchCart, currentUser } = useContext(ShopProductsContext)
     const { product: { title, price }, description } = state;
+
+    const history = useHistory();
+
+    const handleAddToCart =  () => {
+        addItemToCart(dispatchCart, state, currentUser);
+    }
+
+    const handleCheckoutPage = () => {
+        history.push("/checkout")
+    }
+
     return (
         <div className="individual-item-right-side-container">
             <Heading title={title} display="display-5"
                 h1="heading-in-individual-item"  />
             <h4 className="display-4 text-center my-5 text-uppercase"> cad ${price}</h4>
             
-            <div onClick={() => addItemToCart(dispatchCart, state)} className="add-to-cart-button text-center">
+            <div className="text-center">
             {
                 !cart.map(item => item._id).includes(state._id) ? ( 
-                    <CustomButton title="Add to cart" button="btn-cart p-2" />
+                    <CustomButton title="Add to cart" button="btn-cart p-2" onClick={handleAddToCart} />
                 ) : ( 
-                    <CustomButton title="Add One More Item" button="btn-cart p-2" />
+                    <CustomButton onClick={handleCheckoutPage} title="Go to Checkout" button="btn-cart p-2" />
                 ) 
             }
-                
             </div>
             <div className="descriptions">
             {
