@@ -1,14 +1,9 @@
-import React,{ useEffect, useRef, useState } from 'react'
-// import Swiper from 'react-id-swiper';
-// import { Controller } from 'swiper/js/swiper.esm';
-// import 'swiper/css/swiper.min.css';
+import React,{ useEffect, useState } from 'react'
 import Slider from "react-slick";
 
 import "./individual-item.styles.css"
 import IndividualItemRightSide from '../individual-item-right-side/individual-item-right-side.component';
 import ProductDetails from '../product-details/product-details.component';
-import ArrowImageRight from '../arrow-image-right/arrow-image-right.component';
-import ArrowImageLeft from '../arrow-image-left/arrow-image-left.component';
 
 
 export default function IndividualItem({ state }) {
@@ -88,59 +83,3 @@ export default function IndividualItem({ state }) {
         </div>
     )
 }
-
-// const gallerySwiperRef = useRef(null);
-// const thumbnailSwiperRef = useRef(null);
-
-// const gallerySwiperParams = {
-//     modules: [Controller],
-//     slidesPerView: 1,
-//     spaceBetween: 10,
-//     loop: true,
-//     direction: "horizontal",
-//     navigation: {
-//       nextEl: '.swiper-button-next',
-//       prevEl: '.swiper-button-prev',
-//     }
-// };
-
-// const thumbnailSwiperParams = {
-//     modules: [Controller],
-//     spaceBetween: 10,
-//     centeredSlides: true,
-//     slidesPerView: 'auto',
-//     touchRatio: 0.2,
-//     slideToClickedSlide: true
-// };
-
-// useEffect(() => {
-//     const gallerySwiper = gallerySwiperRef.current.swiper;
-//     const thumbnailSwiper = thumbnailSwiperRef.current.swiper;
-//     if (gallerySwiper.controller && thumbnailSwiper.controller) {
-//       gallerySwiper.controller.control = thumbnailSwiper;
-//       thumbnailSwiper.controller.control = gallerySwiper;
-//     }
-// },[gallerySwiperRef, thumbnailSwiperRef]);
-
-
-
-
-
-// <Swiper {...gallerySwiperParams} ref={gallerySwiperRef}>
-// {
-//     state.largeImage.map(img => (
-//         <div className="individual-item-big-img-container text-center" key={img._id}>
-//             <img src={img.largeImage} alt={`Large product ${img._id}`} />
-//         </div>
-//     ))
-// }
-// </Swiper>
-// <Swiper {...thumbnailSwiperParams} ref={thumbnailSwiperRef}>
-// {
-//     state.smallImage.map((img, idx) => (
-//         <div className="small-image-container" key={img._id}>
-//             <img src={img.smallImage} alt={`Small product ${img._id}`}/>
-//         </div>
-//     ))
-// }
-// </Swiper>

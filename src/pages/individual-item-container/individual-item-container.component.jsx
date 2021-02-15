@@ -3,7 +3,6 @@ import { Route } from "react-router-dom"
 
 import Spinner from "../../components/spinner/spinner.component"
 import API from "../../API"
-import ProductDetails from '../../components/product-details/product-details.component';
 
 const IndividualItem = lazy(() => import("../../components/individual-item/individual-item.component"));
 

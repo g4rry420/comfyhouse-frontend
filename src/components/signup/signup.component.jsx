@@ -27,8 +27,6 @@ export default function SignUp() {
         const dataToSend = { fullName, email, password }
 
         try {
-            // const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            // await createUserProfileDocument(user, {displayName});
             fetch(`${API}/signup`,{
                 method: "POST",
                 headers: {

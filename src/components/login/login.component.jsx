@@ -100,7 +100,6 @@ export default function LogIn({ state }) {
                 <FormInput name="password" handleChange={handleChange} value={password} type="password" placeholder="Password" />
                 <div className="text-center d-md-flex justify-content-around both-buttons-container">
                     <div className="google-login">
-                       {/* <CustomButton  type="button" title="Sign In With Google" button="login-button" />*/}
                         <GoogleLogin 
                             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                             render={renderProps => (

@@ -14,7 +14,6 @@ function App() {
   return (
     <div className="App mb-5">
       <Header/>
-
       <ErrorBoundary>
         <Suspense fallback={<Spinner/>}>
           <Switch>

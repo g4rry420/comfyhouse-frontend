@@ -5,8 +5,6 @@ import 'swiper/css/swiper.min.css';
 import "./category-mainSection.styles.css"
 import MainSectionSideHeading from '../mainSection-side-Heading/mainSection-side-Heading.component'
 import MainSectionItems from '../mainSection-Items/mainSection-Items.component'
-// import ArrowImageRight from '../arrow-image-right/arrow-image-right.component';
-// import ArrowImageLeft from '../arrow-image-left/arrow-image-left.component';
 
 function CategoryMainSection({ state }) {
     const swiperRef = useRef();
