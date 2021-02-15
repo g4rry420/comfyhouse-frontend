@@ -75,7 +75,6 @@ export default function LogIn({ state }) {
 
     }
 
-    console.log(currentUser)
 
     const { email, password } = login;
 
