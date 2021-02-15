@@ -24,7 +24,9 @@ function Department() {
         {
             departments ? departments.map(department => (
                 <DepartmentItem key={department._id} {...department} />
-            )) : <Spinner/>
+            )) : (
+                <Spinner/>
+            )
         }
         </div>
     )
