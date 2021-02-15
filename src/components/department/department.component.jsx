@@ -3,6 +3,7 @@ import React,{ useEffect, useState } from 'react'
 import "./department.styles.css"
 import DepartmentItem from '../department-item/department-item.component';
 import API from "../../API" 
+import Spinner from "../spinner/spinner.component"
 
 function Department() {
     const [departments, setDepartments] = useState(null)
@@ -21,9 +22,9 @@ function Department() {
     return (
         <div className="row">
         {
-            departments && departments.map(department => (
+            departments ? departments.map(department => (
                 <DepartmentItem key={department._id} {...department} />
-            ))
+            )) : <Spinner/>
         }
         </div>
     )
