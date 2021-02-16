@@ -13,6 +13,30 @@ function CategoryMainSection({ state }) {
         slidesPerView: 5,
         spaceBetween: 30,
         direction: "horizontal",
+
+        breakpoints: {
+            991: {
+              slidesPerView: 5,
+            //   spaceBetween: 40
+            },
+            750: {
+              slidesPerView: 4,
+            //   spaceBetween: 30
+            },
+            600: {
+              slidesPerView: 3,
+            //   spaceBetween: 20
+            },
+            450: {
+              spaceBetween: 10
+            },
+            300: {
+                slidesPerView: 2,
+            },
+            100: {
+                slidesPerView: 1
+            }
+          }
         // navigation: {
         //     nextEl: '.swiper-button-next',
         //     prevEl: '.swiper-button-prev'
