@@ -9,7 +9,7 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 function CheckoutPage({ location }) {
     const { cart, currentUser } = useContext(ShopProductsContext);
     if(!currentUser) return <Redirect to={{ pathname: "/loginorsignup", state: { previousPath: location.pathname } }} />
-
+    
     let total = cart.reduce((accQty, item) => {
         return (accQty + (item.qty * item.price));
             }, 0)
@@ -33,8 +33,8 @@ function CheckoutPage({ location }) {
                 </div>
             </div>
             {
-                cart.map( ({_id, ...otherProps} ) => (
-                    <CheckoutItem key={_id} {...otherProps} _id={_id} />
+                cart.map((cartItem, idx) => (
+                    <CheckoutItem key={cartItem._id} cartItem={cartItem} idx={idx} />
                 ))
             }
 

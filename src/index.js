@@ -8,13 +8,13 @@ import ShopProductsContextProvider from './context/shopProducts/shopProductsCont
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <ShopProductsContextProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </ShopProductsContextProvider>
-  // </React.StrictMode>
+  </React.StrictMode>
   ,
   document.getElementById('root')
 );

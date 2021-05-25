@@ -84,7 +84,7 @@ export const removeItem = (dispatchCart, _id, currentUser) => {
         .catch(err => console.log(err))
 }
 
-export const qtyIncrease = (dispatchCart, _id, currentUser) => {
+export const qtyIncrease = (dispatchCart, _id, currentUser, index) => {
 
     const dataToSend = {
         productId: _id
@@ -105,7 +105,7 @@ export const qtyIncrease = (dispatchCart, _id, currentUser) => {
             console.log(data)
             dispatchCart({
                 type: "QTY_INCREASE",
-                _id
+                _id, index
             })
         }else{
             console.log(data)
@@ -114,7 +114,7 @@ export const qtyIncrease = (dispatchCart, _id, currentUser) => {
     .catch(err => console.log(err))
 }
 
-export const qtyDecrease = (dispatchCart, product, currentUser) => {
+export const qtyDecrease = (dispatchCart, product, currentUser, index) => {
     const dataToSend = {
         productId: product._id
     }
@@ -134,7 +134,7 @@ export const qtyDecrease = (dispatchCart, product, currentUser) => {
             console.log(data)
             dispatchCart({
                 type: "QTY_DECREASE",
-                product
+                product, index
             })
         }else{
             console.log(data)

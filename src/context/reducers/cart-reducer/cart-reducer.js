@@ -18,39 +18,46 @@ export const cartReducer = (state, action) => {
                     _id: action.product._id,
                     qty: 1,
                 }]
-            }else{
-                return state.filter(item => {
-                        if(item._id === action.product._id){
-                            return item.qty++;
-                        }
-                        return item;
-                    })
             }
+            // else{
+            //     return state.filter(item => {
+            //             if(item._id === action.product._id){
+            //                 return item.qty++;
+            //             }
+            //             return item;
+            //         })
+            // }
+            return state;
         
         case "REMOVE_ITEM":
             return state.filter(item => item._id !== action._id)
         
         case "QTY_INCREASE":
-            return state.filter(item => {
-                if(item._id === action._id){
-                    return item.qty++;
-                }
-                return item;
-            })
+            if(action.index > -1 && action.index !== undefined){
+                const newState = [
+                    ...state.slice(0, action.index),
+                    {...state[action.index], qty: state[action.index].qty + 1},
+                    ...state.slice(action.index + 1)
+                ];
+                return newState;
+            }
+            return state;
          
         case "QTY_DECREASE":
             if(action.product.qty === 1){
                 return state.filter(item => item._id !== action.product._id)
             }
             
-            return state.filter(item => {
-                if(item._id === action.product._id){
-                    return item.qty--;
-                }
-                return item;
-            })
+            if(action.index > -1 && action.index !== undefined) {
+                const newState = [
+                    ...state.slice(0, action.index),
+                    {...state[action.index], qty: state[action.index].qty - 1},
+                    ...state.slice(action.index + 1)
+                ]
+                return newState;
+            }
+            return state;
             
-
         default:
             return state
     }
