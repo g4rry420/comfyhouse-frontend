@@ -8,12 +8,7 @@ import { updateCart } from "../reducers/cart-reducer/cart-actions"
 export const ShopProductsContext = createContext();
 
 const ShopProductsContextProvider = (props) => {  
-    const [loading ,setLoading] = useState(true);
-
-    const [cartHidden, setCartHidden] = useState(true);
-
     const [currentUser, setCurrentUser] = useState(null);
-
     const [cart, dispatchCart] = useReducer(
         // process.env.NODE_ENV === "development" ? logger(cartReducer) : cartReducer
         cartReducer
@@ -102,8 +97,8 @@ const ShopProductsContextProvider = (props) => {
 
     return (
         <ShopProductsContext.Provider 
-            value={{currentUser,setCurrentUser, loading,
-                    dispatchCart, cartHidden, setCartHidden, cart, autheticate}}>
+            value={{currentUser,setCurrentUser,
+                    dispatchCart, cart, autheticate}}>
             {props.children}
         </ShopProductsContext.Provider>
     )

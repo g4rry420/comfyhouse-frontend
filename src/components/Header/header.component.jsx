@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { NavLink, Link, withRouter } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,7 +11,8 @@ import { emptyCart } from "../../context/reducers/cart-reducer/cart-actions"
 import API from "../../API"
 
 function Header({ location }) {
-    const { cartHidden, currentUser,setCurrentUser, dispatchCart } = useContext(ShopProductsContext);
+    const { currentUser,setCurrentUser, dispatchCart } = useContext(ShopProductsContext);
+    const [cartHidden, setCartHidden] = useState(true);
     const toggleNavbar = useRef();
     const navbar = (e) => {
         toggleNavbar.current.classList.toggle("sidebar-open")
@@ -25,6 +26,8 @@ function Header({ location }) {
             .then(response => response.json())
             .then(data => console.log(data))
     }
+
+    const handleCartHidden = () => setCartHidden(prevState => !prevState);
 
     return (
         <nav className="container d-flex p-3 justify-content-between">
@@ -64,11 +67,11 @@ function Header({ location }) {
 
                 
                 <li className="list-menu cart-icon-link">
-                   <CartIcon />
+                   <CartIcon handleCartHidden={handleCartHidden} />
                 </li>
             </ul>
             {
-                cartHidden ? null : <CartDropdown/>
+                !cartHidden && <CartDropdown handleCartHidden={handleCartHidden} />
             }
         </nav>
     )
