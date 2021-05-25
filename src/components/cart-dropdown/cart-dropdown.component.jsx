@@ -6,8 +6,8 @@ import { ShopProductsContext } from "../../context/shopProducts/shopProductsCont
 import CustomButton from '../custom-button/custom-button.component';
 import CartItem from '../cart-item/cart-item.component';
 
-function CartDropdown({ history }) {
-    const { cart, cartHidden, setCartHidden } = useContext(ShopProductsContext);
+function CartDropdown({ history, handleCartHidden }) {
+    const { cart } = useContext(ShopProductsContext);
     return (
         <div className='cart-dropdown'>
             <div className='cart-items'>
@@ -21,7 +21,7 @@ function CartDropdown({ history }) {
             </div>
             <div className="cart-dropdown-button-container" onClick={() =>{
                 history.push("/checkout");
-                setCartHidden(!cartHidden);
+                handleCartHidden();
             }}>
                 <CustomButton title="Go&nbsp;to&nbsp;checkout&nbsp;page" button="cart-dropdown-button" />
             </div>
