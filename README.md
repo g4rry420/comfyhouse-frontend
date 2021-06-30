@@ -35,6 +35,8 @@ This is frontend of `Comfy House`. To visit the back-end, click on this [link](h
 -   Persistand storage for cart item even if you logout.
 -   At Last, Made payment for the item using the test card information.
 
+<img align="right" src="./comfyHouse.PNG" height="164px"/>
+
 ## Usage
 
 -   `npm start` - To start with frontend of the project.
