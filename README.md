@@ -32,6 +32,7 @@ This is my first full-stack project that I made with and also it was my first pr
 -   User login/sign up secure authentication using JWT and one click `google` authentication.
 -   Add Item to the Cart
 -   Persistand storage for cart item even if you logout.
+-   At Last, Made payment for the item using the test card information.
 
 ## Usage
 
