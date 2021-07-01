@@ -37,6 +37,7 @@ This is frontend of `Comfy House`. To visit the back-end, click on this [link](h
 
 
 <img width="100%" height="100%" src="./comfyHouse.gif" height="100%"/>
+
 ## Usage
 
 -   (Optional) - Add Google Client Id for Google Authentication.
