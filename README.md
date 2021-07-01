@@ -37,7 +37,7 @@ This is frontend of `Comfy House`. To visit the back-end, click on this [link](h
 
 <img width="100%" height="100%" src="./comfyHouse.PNG" height="164px"/>
 
-<img width="100%" height="100%" src="./comfyHouse.gif" height="164px"/>
+<img width="100%" height="100%" src="./comfyHouse.gif" height="100%"/>
 ## Usage
 
 -   `npm start` - To start with frontend of the project.
