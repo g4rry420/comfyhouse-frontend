@@ -1,6 +1,6 @@
 # Comfy House
 
-Comfy House is an ecommerce web app made for people to decorate their homes. If someone is looking for _**furniture**_, _**rugs**_, _**kicthen material**_, _**lightning**_, etcetera. We got you covered.
+Comfy House is an ecommerce web app made for people to decorate their homes. If you are looking for _**furniture**_, _**rugs**_, _**kicthen material**_, _**lightning**_, etcetera. We got you covered.
 
 ## Table of Contents
 
@@ -37,6 +37,7 @@ This is frontend of `Comfy House`. To visit the back-end, click on this [link](h
 
 <img width="100%" height="100%" src="./comfyHouse.PNG" height="164px"/>
 
+<img width="100%" height="100%" src="./comfyHouse.gif" height="164px"/>
 ## Usage
 
 -   `npm start` - To start with frontend of the project.
